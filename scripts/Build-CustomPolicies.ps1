@@ -10,6 +10,7 @@
 .NOTES    
     ChangeLog:
         1.0.0 - Converted VSCODE script to Powrshell for Build Server usage - https://github.com/azure-ad-b2c/vscode-extension/blob/master/src/PolicyBuild.ts
+        1.0.1 - Fix for filenames on non-Windows operating systems
 .PREREQUISITES
    The following resources must be pre created before running the script
    1. appsettings.json file exists in proper format        
@@ -29,7 +30,7 @@ try{
     $AppSettingsJson = Get-Content -Raw -Path $AppSettingsFile | ConvertFrom-Json
 
     #Read all policy files from the root directory            
-    $XmlPolicyFiles = Get-ChildItem -Path $FilePath -Filter *.xml
+    $XmlPolicyFiles = Get-ChildItem -Path $FilePath -Filter *.xml -Name
     Write-Verbose "Files found: $XmlPolicyFiles"
 
     #Get the app settings                        
